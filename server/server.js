@@ -17,26 +17,31 @@ io.on('connection',(socket)=>{
 	console.log('new user is connected.');
 
 
-	socket.on('createMessage',function(msg){
-		console.log('createMessage', msg);
+	socket.emit('newMessage',{
+		"from":"Admin",
+		"text":"welcome to the chat app."
+	});
 
-		io.emit('newMessage',{
-			from:msg.from,
-			text:msg.text,
-			createdAt:new Date().getTime()
-		});
+	socket.broadcast.emit('newMessage',{
+		from:"admin",
+		text:"new user has joined."
+	});
 
-	// 	io.emit('newMessage',{
-	// 	from:msg.from,
-	// 	text:msg.text,
-	// 	createdAt:new Date().getTime()
-	// });
+		// io.emit('newMessage',{
+		// 	from:msg.from,
+		// 	text:msg.text,
+		// 	createdAt:new Date().getTime()
+		// });
 
-});
+
+	  
+
 	socket.emit('newMsg',{
 		"from":"ratnambar",
 		"text":"hello everyone."
+
 	});
+
 
 
 	socket.on('reply', function(data){
